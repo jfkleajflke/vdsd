@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تحميل المتصفح</title>
 <style>
-  /* تهيئة الصفحة بالكامل */
   * {
     margin: 0;
     padding: 0;
@@ -25,7 +24,6 @@
     transition: background-image 1s ease-in-out;
   }
 
-  /* الزر */
   .download-btn {
     padding: 20px 50px;
     font-size: 24px;
@@ -40,7 +38,7 @@
     animation: gradientMove 5s ease infinite;
     position: relative;
     z-index: 1;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
   }
 
   .download-btn:hover {
@@ -54,24 +52,12 @@
     100% {background-position: 0% 50%;}
   }
 
-  /* أنيميشن التحميل عند الضغط */
-  .loading::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 30px; height: 30px;
-    margin: -15px 0 0 -15px;
-    border: 4px solid #fff;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+  /* تأثير التحول بعد الضغط */
+  .download-btn.success {
+    background: linear-gradient(45deg, #00c853, #b2ff59);
+    animation: none;
+    transform: scale(1.15);
   }
-
-  @keyframes spin {
-    0% {transform: rotate(0deg);}
-    100% {transform: rotate(360deg);}
-  }
-
 </style>
 </head>
 <body>
@@ -86,7 +72,6 @@
     'https://i.pinimg.com/originals/4a/19/e8/4a19e82d9a5bb5320fffe591461dfe6e.gif'
   ];
 
-  // تعيين خلفية عشوائية عند فتح الصفحة
   function setRandomBackground() {
     const randomIndex = Math.floor(Math.random() * backgrounds.length);
     document.body.style.backgroundImage = `url('${backgrounds[randomIndex]}')`;
@@ -94,18 +79,19 @@
 
   setRandomBackground();
 
-  // الزر مع تأثير التحميل
   const downloadBtn = document.getElementById('downloadBtn');
   downloadBtn.addEventListener('click', () => {
-    downloadBtn.classList.add('loading');
-    downloadBtn.disabled = true; // منع الضغط المتكرر
-    // الانتقال للتحميل بعد لحظة لإظهار الأنيميشن
+    // تغيير النص والتأثير
+    downloadBtn.textContent = 'تم!';
+    downloadBtn.classList.add('success');
+    downloadBtn.disabled = true;
+
+    // بعد لحظة بسيطة، يبدأ التحميل
     setTimeout(() => {
       window.location.href = 'https://github.com/jfkleajflke/vdsd/releases/download/v1.0.1/default.apk';
-    }, 500);
+    }, 600);
   });
 
-  // إعادة تعيين الخلفية عند refresh
   window.addEventListener('load', setRandomBackground);
 </script>
 
