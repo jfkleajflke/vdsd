@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Download Experience</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body, html {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #000; /* خلفية سوداء فخمة قبل تحميل الصور */
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1.5s ease-in-out;
+  }
+
+  /* الحاوية الخارجية لإعطاء توهج خلف الزر */
+  .vip-container {
+    position: relative;
+    padding: 10px;
+    border-radius: 60px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+
+  .download-btn {
+    position: relative;
+    padding: 22px 60px;
+    font-size: 26px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #000;
+    background: linear-gradient(45deg, #D4AF37, #F9F4A0, #D4AF37, #B8860B);
+    background-size: 300% 300%;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+  }
+
+  /* تأثير اللمعان المتحرك على الذهب */
+  .download-btn:hover {
+    background-position: 100% 50%;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.7);
+  }
+
+  .download-btn:active {
+    transform: translateY(-2px) scale(1);
+  }
+
+  /* الطبقة الضوئية التي تمر فوق الزر */
+  .download-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(30deg);
+    transition: all 0.6s ease;
+    animation: shine 4s infinite;
+  }
+
+  @keyframes shine {
+    0% { left: -60%; }
+    20% { left: 120%; }
+    100% { left: 120%; }
+  }
+
+  /* حالة التحميل (Spinner) */
+  .loader {
+    display: none;
+    width: 28px;
+    height: 28px;
+    border: 4px solid #000;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: rotation 1s linear infinite;
+    margin-left: 15px;
+  }
+
+  @keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* تحويل الزر عند النجاح */
+  .download-btn.loading {
+    color: transparent;
+    pointer-events: none;
+  }
+
+  .download-btn.loading .loader {
+    display: inline-block;
+    position: absolute;
+  }
+
+  .download-btn.success {
+    background: #00c853;
+    color: #fff;
+    box-shadow: 0 0 40px #00c853;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="vip-container">
+  <button class="download-btn" id="downloadBtn">
+    <span id="btnText">تحميل VIP</span>
+    <div class="loader"></div>
+  </button>
+</div>
+
+<script>
+  const backgrounds = [
+    'https://i.pinimg.com/originals/21/d5/73/21d57317719970e502def539240dddac.gif',
+    'https://i.pinimg.com/originals/2f/dd/47/2fdd4745001b3c199be23ebd4c9a85b6.gif',
+    'https://i.pinimg.com/originals/bc/a4/54/bca454285ab98ca2d28e1e5eda9ee0d7.gif',
+    'https://i.pinimg.com/originals/4a/19/e8/4a19e82d9a5bb5320fffe591461dfe6e.gif'
+  ];
+
+  function setRandomBackground() {
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    document.body.style.backgroundImage = `url('${backgrounds[randomIndex]}')`;
+  }
+
+  setRandomBackground();
+
+  const downloadBtn = document.getElementById('downloadBtn');
+  const btnText = document.getElementById('btnText');
+
+  downloadBtn.addEventListener('click', () => {
+    // تشغيل وضع التحميل VIP
+    downloadBtn.classList.add('loading');
+    
+    // بعد 1.5 ثانية يظهر التمام ويبدأ التحميل
+    setTimeout(() => {
+      downloadBtn.classList.remove('loading');
+      downloadBtn.classList.add('success');
+      btnText.textContent = 'تم التجهيز';
+      btnText.style.color = "#fff";
+
+      setTimeout(() => {
+        window.location.href = 'https://github.com/jfkleajflke/vdsd/releases/download/V1.1.2/app-release.apk';
+      }, 500);
+    }, 1500);
+  });
+</script>
+
+</body>
+</html>
